@@ -1,5 +1,8 @@
 package lv.tsi.javacourses.bookshelf;
 
+import lv.tsi.javacourses.bookshelf.bounderies.BookSearchForm;
+import lv.tsi.javacourses.bookshelf.entities.Book;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;

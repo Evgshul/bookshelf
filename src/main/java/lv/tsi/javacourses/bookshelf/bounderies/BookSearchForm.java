@@ -1,4 +1,6 @@
-package lv.tsi.javacourses.bookshelf;
+package lv.tsi.javacourses.bookshelf.bounderies;
+
+import lv.tsi.javacourses.bookshelf.entities.Book;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
