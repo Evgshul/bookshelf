@@ -11,12 +11,13 @@ public class Book {
     private String title;
     @Column(nullable = false)
     private String author;
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1000)
     private String description;
     @Column(nullable = false)
     private int year;
     @Column(nullable = false)
     private String isbn;
+
 
     public Long getId() {
         return id;
@@ -64,5 +65,6 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+
     }
 }

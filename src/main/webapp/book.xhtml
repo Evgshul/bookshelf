@@ -5,14 +5,51 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
 <ui:composition template="template.xhtml">
     <f:metadata>
         <f:viewParam name="id" value="#{bookDetailsForm.bookId}"/>
         <f:viewAction action="#{bookDetailsForm.findBook()}"/>
     </f:metadata>
-    <ui:define name="title">Book Details</ui:define>
+    <ui:define name="title">#{bookDetailsForm.book.title}</ui:define>
     <ui:define name="content">
-        <h:outputLabel value="Hello, world"/>
+        <div class="w3-content">
+            <h2 class="w3-xxlarge w3 center">#{bookDetailsForm.book.title}</h2>
+            <div class="w3-row-padding">
+                <div class="w3-col s12 m12 l6">
+                    <img src="http://via.placeholder.com/350/444/2f2/cover.png?text=#{bookDetailsForm.book.title}"
+                         style="width:100%; max-width: 500px"/>
+                </div>
+                <div class="w3-col s12 m12 l6">
+                    <table class="w3-table">
+                        <tr>
+                            <th>Title</th>
+                            <td>#{bookDetailsForm.book.title}</td>
+                        </tr>
+                        <tr>
+                            <th>Author</th>
+                            <td>#{bookDetailsForm.book.author}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>#{bookDetailsForm.book.description}</td>
+                        </tr>
+                        <tr>
+                            <th>Year</th>
+                            <td>#{bookDetailsForm.book.year}</td>
+                        </tr>
+                        <tr>
+                            <th>ISBN</th>
+                            <td>#{bookDetailsForm.book.isbn}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
     </ui:define>
 </ui:composition>
+
+
 </html>

@@ -1,4 +1,7 @@
-package lv.tsi.javacourses.bookshelf;
+package lv.tsi.javacourses.bookshelf.boundaries;
+
+import lv.tsi.javacourses.bookshelf.boundaries.BookSearchForm;
+import lv.tsi.javacourses.bookshelf.entities.Book;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,7 +35,7 @@ public class BookSearch {
         String term = "%" + bookSearchForm.getTerm().toUpperCase() + "%";
         q.setParameter("term", term);
         bookSearchForm.setSearchResult(q.getResultList());
-        System.out.println(bookSearchForm.getTerm());
+
 
     }
 

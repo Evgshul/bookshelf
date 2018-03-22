@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 @RequestScoped
 @Named
 public class BookDetailsForm {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -18,8 +19,17 @@ public class BookDetailsForm {
     private Book book;
 
     @Transactional
-    public void findBook() {
-        book = em.find(Book.class, bookId);
+    public void findBook(){
+        book= em.find(Book.class, bookId);
+    }
+
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public Book getBook() {
@@ -28,13 +38,5 @@ public class BookDetailsForm {
 
     public void setBook(Book book) {
         this.book = book;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
     }
 }
