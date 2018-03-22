@@ -20,7 +20,7 @@ public class CurrentUser implements Serializable {
 
     @Transactional// chtobi mozhno bilo najti v baze
     public void signIn(){
-        userId = 1L;
+        userId = -1L;
         signedInUser=em.find(User.class, userId);
 
     }
