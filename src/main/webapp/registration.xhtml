@@ -19,11 +19,14 @@
                 <label>E-mail</label>
                 <h:inputText styleClass="w3-input w3-border"
                              value="#{registrationForm.email}"
+                             
                              validatorMessage="It isn't valid email">
-
                     <f:validateRegex pattern="#{registrationForm.emailRedex}"/>
+
+
                 </h:inputText>
                 <label>Password</label>
+
                 <h:inputSecret styleClass="w3-input w3-border"
                                value="#{registrationForm.password1}"
                                validatorMessage="Password should be 5 chars min">

@@ -14,10 +14,6 @@ public class User implements Serializable {
     @Column(name = "FULL_Name")
     private String fullName;
     @Column
-    private String address;
-    @Column
-    private String phone;
-    @Column
     private String password;
     @Column
     private String email;
@@ -39,23 +35,7 @@ public class User implements Serializable {
         this.fullName = fullName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPassword() {
+       public String getPassword() {
         return password;
     }
 

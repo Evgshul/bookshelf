@@ -6,5 +6,5 @@ INSERT INTO BOOK (ID, AUTHOR, DESCRIPTION, ISBN, TITLE, YEAR) VALUES (-5, 'Seraf
 INSERT INTO BOOK (ID, AUTHOR, DESCRIPTION, ISBN, TITLE, YEAR) VALUES (-6, 'Imran Kuilboer', 'Proin lobortis, eros id luctus pretium, ex ipsum tempus dui, quis fringilla nisi augue in lorem. Nunc augue magna, euismod eget magna non, aliquet dictum erat.', '95-8897-650-2', 'La Mora Ingeniero', 1999);
 
 
-INSERT INTO USER (ID, ADDRESS, FULL_NAME, PHONE, PASSWORD) VALUES (-1, 'Jurmala', 'Edgar Polak', '23 456 789','');
-INSERT INTO USER (ID, ADDRESS, FULL_NAME, PHONE, PASSWORD) VALUES (-2, 'Riga', 'John Roler', '55 785 621','');
+INSERT INTO USER (ID, FULL_NAME,email, PASSWORD) VALUES (-1, 'Edgar Polak', 'asd@inbox.lv','');
+INSERT INTO USER (ID, FULL_NAME,email, PASSWORD) VALUES (-2, 'John Roler', 'zxd@mail.ru','');

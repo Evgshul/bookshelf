@@ -1,5 +1,6 @@
 package lv.tsi.javacourses.bookshelf.boundaries;
 
+import lv.tsi.javacourses.bookshelf.entities.Book;
 import lv.tsi.javacourses.bookshelf.entities.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -10,13 +11,15 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContexts;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @RequestScoped
 @Named
 public class RegistrationForm {
-    private final static String EMAIL_REDEX ="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    private final static String EMAIL_REDEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
     @PersistenceContext
     private EntityManager em;
@@ -26,13 +29,25 @@ public class RegistrationForm {
     private String password1;
     private String password2;
 
+
     @Transactional
-    public String register(){
-        if(!Objects.equals(password1,password2)){
+    public String register() {
+        if (!Objects.equals(password1, password2)) {
             FacesContext.getCurrentInstance()
                     .addMessage(null, new FacesMessage("Password should be the same"));
             return null;
+
         }
+
+        Query e = em.createQuery("SELECT email FROM User  where email = :regMail");
+        e.setParameter("regMail", email);
+        e.getResultList();
+        if (!e.getResultList().isEmpty()) {
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage("enter another email address"));
+            return null;
+        }
+
         User user = new User();
         user.setEmail(email);
         user.setPassword(password1);
@@ -41,9 +56,25 @@ public class RegistrationForm {
         em.persist(user);
 
         return "/registration-complete.xhtml?faces-redirect=true";//?faces-redirect=true perekidivaet na druguju stranicu
+
     }
 
-    public String getEmailRedex(){
+    // @Transactional
+    //private String compareEmail() {
+    ///  Query e = em.createQuery("SELECT email FROM User  where email = :regMail");
+    //       e.setParameter("regMail", email);
+    ///     e.getResultList();
+    //if (!e.getResultList().isEmpty()) {
+    //System.out.println(email);
+
+
+//  FacesContext.getCurrentInstance()
+//        .addMessage(null, new FacesMessage("enter another email address"));
+    //return null;
+    //      }
+
+
+    public String getEmailRedex() {
         return EMAIL_REDEX;
     }
 
@@ -79,3 +110,4 @@ public class RegistrationForm {
         this.password2 = password2;
     }
 }
+
