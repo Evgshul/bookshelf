@@ -58,22 +58,6 @@ public class RegistrationForm {
         return "/registration-complete.xhtml?faces-redirect=true";//?faces-redirect=true perekidivaet na druguju stranicu
 
     }
-
-    // @Transactional
-    //private String compareEmail() {
-    ///  Query e = em.createQuery("SELECT email FROM User  where email = :regMail");
-    //       e.setParameter("regMail", email);
-    ///     e.getResultList();
-    //if (!e.getResultList().isEmpty()) {
-    //System.out.println(email);
-
-
-//  FacesContext.getCurrentInstance()
-//        .addMessage(null, new FacesMessage("enter another email address"));
-    //return null;
-    //      }
-
-
     public String getEmailRedex() {
         return EMAIL_REDEX;
     }
