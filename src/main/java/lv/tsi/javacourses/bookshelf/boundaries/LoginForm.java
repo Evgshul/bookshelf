@@ -1,12 +1,13 @@
 package lv.tsi.javacourses.bookshelf.boundaries;
 
+import lv.tsi.javacourses.bookshelf.entities.User;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.io.StringReader;
 import java.util.Objects;
@@ -14,28 +15,38 @@ import java.util.Objects;
 @RequestScoped
 @Named
 public class LoginForm {
-
     @PersistenceContext
     private EntityManager em;
-
+    @Inject
+    private CurrentUser currentUser;
 
     private String email;
     private String password;
 
     @Transactional
-    public String LogIn() {
-        Query e = em.createQuery("SELECT password FROM User  where password = :logpass");
-        e.setParameter("logpass", password);
-        e.getResultList();
-        // if(Objects.equals((e.getResultList()), password){
-        if (e.getResultList().isEmpty()) {
+    public String login() {
+        TypedQuery<User> query = em.createQuery(
+                "select u from User u where u.email = :email", User.class);
+        query.setParameter("email", email);
+        try {
+            User u = query.getSingleResult();
+            if (Objects.equals(u.getPassword(), password)) {
+                currentUser.setSignedInUser(u);
+                currentUser.setUserId(u.getId());
+                return "/index.xhtml";
+            } else {
+                FacesContext.getCurrentInstance()
+                        .addMessage("login:password", new FacesMessage("Incorect password"));
+            }
+        } catch (NoResultException e) {
             FacesContext.getCurrentInstance()
-                    .addMessage(null, new FacesMessage("Password incorect!!!"));
-
-            return null;
+                    .addMessage(null,
+                            new FacesMessage("Email is not registered"));
         }
-        return "/index.xhtml?faces-redirect=true";
+        return null;
     }
+    //return "/index.xhtml?faces-redirect=true";
+
 
     public String getEmail() {
         return email;

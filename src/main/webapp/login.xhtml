@@ -11,20 +11,21 @@
             <h:form id="login" styleClass="w3-container w3-margin-top">
 
                 <h:messages/>
-                <label>E-mail</label>
-                <h:inputText styleClass="w3-input w3-border"
+                <label>E-mail</label><h:message for="email" errorClass="error-message"/>
+                <h:inputText id ="email" styleClass="w3-input w3-border"
                              value="#{loginForm.email}"
-                             required="true"
-                             requiredMessage="e-mail is required"/>
+                             validatorMessage="It isn't valid email">
+                <f:validateRegex pattern="#{registrationForm.emailRedex}"/>
+                </h:inputText>
                 <label>Password</label>
-                <h:inputSecret styleClass="w3-input w3-border"
+                <h:inputSecret id="password" styleClass="w3-input w3-border"
                                value="#{loginForm.password}"
-                               required="true"
-                               requiredMessage="password is required"/>
-
+                               validatorMessage="Password should be 5 chars min">
+                <f:validateLength minimum="5"/>
+                </h:inputSecret>
                 <div class="margin-top">
                     <h:commandButton styleClass="w3-btn w3-blue"
-                                     value="Sign In" action="#{loginForm.LogIn()}">
+                                     value="Log In" action="#{loginForm.login}">
                         <f:ajax execute="@form" render="@form"/>
                     </h:commandButton>
                 </div>
