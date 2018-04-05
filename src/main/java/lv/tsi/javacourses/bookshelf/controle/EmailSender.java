@@ -38,8 +38,8 @@ public class EmailSender {
             msg.setSubject("Email confirmation", "UTF-8");
             msg.setText("Your confirmation code is " + code, "UTF-8");
 
-            logger.info("confirmation code", code);
-            Transport.send(msg);
+            logger.info("confirmation code {}", code);
+            //Transport.send(msg);
         } catch (MessagingException e) {
             logger.error("Sending email error", e);
         }
@@ -54,7 +54,7 @@ public class EmailSender {
             msg.setSubject("Password reset", "UTF-8");
             msg.setText("You need this code to reset your password: " + code, "UTF-8");
 
-            Transport.send(msg);
+            //Transport.send(msg);
         } catch (MessagingException e) {
             logger.error("Sending email error", e);
         }
