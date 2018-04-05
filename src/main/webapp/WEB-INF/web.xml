@@ -15,7 +15,7 @@
 
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>tjStudentBDSecurityDomain</realm-name>
+        <realm-name>bookshelfBDSecurityDomain</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/login.xhtml</form-error-page>

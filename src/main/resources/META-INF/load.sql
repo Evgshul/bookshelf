@@ -6,5 +6,6 @@ INSERT INTO BOOK (ID, AUTHOR, DESCRIPTION, ISBN, TITLE, YEAR) VALUES (-5, 'Seraf
 INSERT INTO BOOK (ID, AUTHOR, DESCRIPTION, ISBN, TITLE, YEAR) VALUES (-6, 'Imran Kuilboer', 'Proin lobortis, eros id luctus pretium, ex ipsum tempus dui, quis fringilla nisi augue in lorem. Nunc augue magna, euismod eget magna non, aliquet dictum erat.', '95-8897-650-2', 'La Mora Ingeniero', 1999);
 
 
-INSERT INTO USER (ID, FULL_NAME,email, PASSWORD) VALUES (-1, 'Edgar Polak', 'asd@inbox.lv','');
-INSERT INTO USER (ID, FULL_NAME,email, PASSWORD) VALUES (-2, 'John Roler', 'zxd@mail.ru','');
+
+INSERT INTO USERS (ID, FULL_NAME, EMAIL, PASSWORD, CONFIRMED) VALUES (-1, 'admin', 'admin', STRINGDECODE('x61Ey612Kl2gpFL56FT9weDnpSo4AV8j8+qx2AuTHdRyY036xxzTTrw10Wq3+4qQyB+XURPWx1ON\nxp3Y3pB37A=='), true);
+INSERT INTO ROLES (ID, NAME, DESCRIPTION) VALUES (-1, 'admin', 'admin');

@@ -9,26 +9,52 @@
     <ui:define name="content">
         <div class="w3-content">
             <h:form id="login" styleClass="w3-container w3-margin-top">
+                <h:panelGroup rendered="#{not currentUser.signedIn}">
 
-                <h:messages/>
-                <label>E-mail</label><h:message for="email" errorClass="error-message"/>
-                <h:inputText id ="email" styleClass="w3-input w3-border"
-                             value="#{loginForm.email}"
-                             validatorMessage="It isn't valid email">
-                <f:validateRegex pattern="#{registrationForm.emailRedex}"/>
-                </h:inputText>
-                <label>Password</label>
-                <h:inputSecret id="password" styleClass="w3-input w3-border"
-                               value="#{loginForm.password}"
-                               validatorMessage="Password should be 5 chars min">
-                <f:validateLength minimum="5"/>
-                </h:inputSecret>
-                <div class="margin-top">
-                    <h:commandButton styleClass="w3-btn w3-blue"
-                                     value="Log In" action="#{loginForm.login}">
-                        <f:ajax execute="@form" render="@form"/>
-                    </h:commandButton>
-                </div>
+                    <label>E-mail</label><h:message for="email" errorClass="error-message"/>
+                    <h:inputText id="email" styleClass="w3-input w3-border"
+                                 value="#{loginForm.email}"
+                                 required="true"
+                                 requiredMessage="E-mail is required"/>
+
+                    <label>Password</label><h:message for="password" errorClass="error-message"/>
+                    <h:inputSecret id="password" styleClass="w3-input w3-border"
+                                   value="#{loginForm.password}"
+                                   redisplay="true"
+                                   required="true"
+                                   requiredMessage="Password is required"/>
+
+                    <div class="w3-margin-top w3-row">
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-left:0!important">
+                            <h:commandButton styleClass="w3-btn w3-green" style="width: 100%"
+                                             value="Sign In"
+                                             action="#{loginForm.login}">
+                                <f:ajax execute="@form" render="@form"/>
+                            </h:commandButton>
+                        </div>
+                        <div class="w3-col s12 m4 l4 w3-padding-small">
+                            <h:link styleClass="w3-btn w3-yellow" style="width: 100%"
+                                    value="New user"
+                                    outcome="/registration.xhtml"/>
+                        </div>
+                        <div class="w3-col s12 m4 l4 w3-padding-small" style="padding-right:0!important">
+                            <h:link styleClass="w3-btn w3-red w3-col s12 m4 l4" style="width: 100%"
+                                    value="Reset password"
+                                    outcome="/reset.xhtml"/>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{currentUser.signedIn}">
+                    <div class="w3-panel w3-green w3-center w3-padding">
+                        <h3>Hello, <h:outputText value="#{currentUser.signedInUser.fullName}"/>!</h3>
+                        <p>You are successfully signed in.</p>
+                        <h:commandButton styleClass="w3-btn w3-black"
+                                         value="Sign out"
+                                         action="#{loginForm.signOut}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>
+                    </div>
+                </h:panelGroup>
             </h:form>
         </div>
     </ui:define>

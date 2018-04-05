@@ -26,7 +26,7 @@
                         styleClass="w3-bar-item w3-button"
                         rendered="#{request.isUserInRole('admin')}"/>
 
-                <h:commandLink value="Sign in / Register" outcome="/login.xhtml"
+                <h:link value="Sign in / Register" outcome="/login.xhtml"
                                styleClass="w3-bar-item w3-button w3-right"
                                rendered="#{not currentUser.signedIn}"/>
                 <h:commandLink value="Sign Out" action="#{currentUser.signOut()}"
@@ -37,7 +37,6 @@
             </nav>
         </h:form>
         <ui:insert name="content"/>
-
     </div>
 </h:body>
 </html>
