@@ -101,8 +101,9 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
-                ", password='" + password + '\'' +
+                ", password='***" +
                 ", email='" + email + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

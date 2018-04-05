@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Objects;
 
-@RequestScoped
+@ViewScoped
 @Named
 public class LoginForm implements Serializable{
     private static final Logger logger = LoggerFactory.getLogger(LoginForm.class);
@@ -37,7 +38,7 @@ public class LoginForm implements Serializable{
     public String login() {
         User user = userControl.findUserByEmail(email, true);
         if (user == null) {
-            Util.addError("LoginForm:email", "Unknown email");
+            Util.addError("login:email", "Unknown email");
             return null;
         }
         try {
@@ -47,7 +48,7 @@ public class LoginForm implements Serializable{
             return "/login.xhtml?faces-redirect=true";
         } catch (ServletException e) {
             logger.error("Sign in error", e);
-            Util.addError("LoginForm:password", "Wrong password");
+            Util.addError("login:password", "Wrong password");
 
         }
         return null;
