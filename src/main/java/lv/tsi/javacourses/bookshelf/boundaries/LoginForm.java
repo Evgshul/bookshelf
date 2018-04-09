@@ -45,7 +45,7 @@ public class LoginForm implements Serializable{
             request.login(email, password);
             currentUser.setSignedInUser(user);
             logger.debug("User {} is signed in", user);
-            return "/login.xhtml?faces-redirect=true";
+            return "/user-space/mybook.xhtml?faces-reditect=true";
         } catch (ServletException e) {
             logger.error("Sign in error", e);
             Util.addError("login:password", "Wrong password");
@@ -54,13 +54,14 @@ public class LoginForm implements Serializable{
         return null;
     }
 
-    public void signOut() {
+    public String signOut() {
         try {
             request.logout();
             currentUser.setSignedInUser(null);
         } catch (ServletException e) {
             logger.error("Sign out error", e);
         }
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public String getEmail() {

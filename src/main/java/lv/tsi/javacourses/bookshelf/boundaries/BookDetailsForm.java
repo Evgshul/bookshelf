@@ -33,7 +33,7 @@ public class BookDetailsForm {
     }
 
     @Transactional
-    public void reserve() {
+    public String reserve() {
         logger.info("RESERVATION STARTED");
         User user = currentUser.getSignedInUser();
         findBook();
@@ -52,7 +52,7 @@ public class BookDetailsForm {
         if (!reservations.isEmpty()) {
             FacesContext.getCurrentInstance()
                     .addMessage(null, new FacesMessage("Already reserve "));
-            return;
+            return null;
         }
 
         Reservation reservation = new Reservation();
@@ -61,6 +61,7 @@ public class BookDetailsForm {
         reservation.setStatus(Status.WAIT);
 
         em.persist(reservation);
+        return "/user-space/mybooks.xhtml?faces-redirect=true";
     }
 
     public Long getBookId() {
