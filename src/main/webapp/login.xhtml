@@ -48,11 +48,10 @@
                     <div class="w3-panel w3-green w3-center w3-padding">
                         <h3>Hello, <h:outputText value="#{currentUser.signedInUser.fullName}"/>!</h3>
                         <p>You are successfully signed in.</p>
-                        <h:commandButton styleClass="w3-btn w3-black"
-                                         value="Sign out"
-                                         action="#{loginForm.signOut}">
+                        <h:link styleClass="w3-btn w3-black"
+                                         value="Sign out">
                             <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>
+                        </h:link>
                     </div>
                 </h:panelGroup>
             </h:form>
